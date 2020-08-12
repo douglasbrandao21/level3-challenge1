@@ -13,8 +13,6 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ size = 'large' }: HeaderProps) => {
   const location = useLocation();
 
-  console.log(location.pathname);
-
   return (
     <Container size={size}>
       <header>
