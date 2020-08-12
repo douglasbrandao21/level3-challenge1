@@ -1,7 +1,13 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import { Link as ReactRouterLink, LinkProps } from 'react-router-dom';
 
 interface ContainerProps {
   size?: 'small' | 'large';
+}
+
+interface MenuProps extends LinkProps {
+  active: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -18,19 +24,38 @@ export const Container = styled.div<ContainerProps>`
 
     nav {
       a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 16px;
-        transition: opacity 0.2s;
-
-        & + a {
-          margin-left: 32px;
-        }
-
-        &:hover {
-          opacity: 0.6;
-        }
       }
     }
   }
+`;
+
+export const Link = styled(ReactRouterLink)<MenuProps>`
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: opacity 0.2s;
+  position: relative;
+
+  & + a {
+    margin-left: 32px;
+  }
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  ${props =>
+    props.active &&
+    css`
+      &:after {
+        content: '';
+        position: absolute;
+        width: 70px;
+        height: 2px;
+        left: 50%;
+        bottom: -12px;
+        margin-left: -35px;
+        background-color: #ff872c;
+      }
+    `}
 `;
